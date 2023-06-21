@@ -10,10 +10,12 @@ const Credit = (props) => {
   const renderCreditList = () => {
     return props.creditList.map((credit, index) => {
       return (
-        <div key={index} className="debit-item">
-          <p className="debit-description">Description: {credit.description}</p>
-          <p className="debit-amount">Amount: ${credit.amount}</p>
-          <p className="debit-debitDate">Date: {credit.date}</p>
+        <div key={index} className="list-item">
+          <p className="item-description">Description: {credit.description}</p>
+          <p className="item-amount">
+            Amount: ${Number(credit.amount).toFixed(2)}
+          </p>
+          <p className="item-debitDate">Date: {credit.date}</p>
         </div>
       );
     });
@@ -40,7 +42,7 @@ const Credit = (props) => {
     <div>
       <h1>I'm on Credit Page</h1>
 
-      <form action="" onSubmit={handleAddCredit}>
+      <form action="" onSubmit={handleAddCredit} className="form">
         <label htmlFor="description">Enter a description</label>
         <input type="text" id="description" required />
         <label htmlFor="amount">Enter an Amount</label>
@@ -51,13 +53,13 @@ const Credit = (props) => {
       </form>
 
       <h3>All Credit:</h3>
-      <div key="inital-credit" className="debit-item">
-        <p className="debit-description">
+      <div key="inital-credit" className="list-item">
+        <p className="item-description">
           Description: Initial Credit provided by the API
         </p>
         {/* prettier-ignore */}
-        <p className="debit-amount">Amount: ${Number(intialCreditAmount).toFixed(2)}</p>
-        <p className="debit-debitDate">Date: {dateStr}</p>
+        <p className="item-amount">Amount: ${Number(intialCreditAmount).toFixed(2)}</p>
+        <p className="item-date">Date: {dateStr}</p>
       </div>
       {renderCreditList()}
     </div>

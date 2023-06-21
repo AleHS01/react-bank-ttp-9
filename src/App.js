@@ -74,41 +74,44 @@ const App = () => {
     <Router>
       <div className="App">
         <header>
-          {/* if credit and debit are defined then lets render the data, else let display loading screen */}
-          {credit !== undefined && debit !== undefined ? (
-            <div>
-              <p style={{ color: balanceTextColor }}>
-                Balance: ${balance.toFixed(2)}
-              </p>
-              <p>Debit: ${Number(debit).toFixed(2)}</p>
-              <p>Credit: ${credit.toFixed(2)}</p>
-            </div>
-          ) : (
-            <div className="loading-div">Loading...</div>
-          )}
-        </header>
-        {/* Navigation */}
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/userProfile">User Profile</Link>
-            </li>
-            <li>
-              <Link to="/debit">Debits</Link>
-            </li>
-            <li>
-              <Link to="/credit">Credit</Link>
-            </li>
-          </ul>
-        </nav>
+          <h1 className="logo-name">AleHS Bank App</h1>
 
+          {/* Navigation */}
+          <nav>
+            <ul>
+              <li>
+                <Link to="/" className="link-item">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/debit" className="link-item">
+                  Debits
+                </Link>
+              </li>
+              <li>
+                <Link to="/credit" className="link-item">
+                  Credit
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
         {/* Routes */}
+        {/* if credit and debit are defined then lets render the data, else let display loading screen */}
+        {credit !== undefined && debit !== undefined ? (
+          <div className="amounts-div">
+            <p className="debit">Debit: ${Number(debit).toFixed(2)}</p>
+            <p style={{ color: balanceTextColor }} className="balance">
+              Balance: ${balance.toFixed(2)}
+            </p>
+            <p className="credit">Credit: ${credit.toFixed(2)}</p>
+          </div>
+        ) : (
+          <div className="loading-div">Loading...</div>
+        )}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/userProfile/*" element={<UserProfile />} />
           <Route
             path="/debit/*"
             element={

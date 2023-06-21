@@ -10,12 +10,12 @@ const Debits = (props) => {
   const renderDebitList = () => {
     return props.debitList.map((debit, index) => {
       return (
-        <div key={index} className="debit-item">
-          <p className="debit-description">Description: {debit.description}</p>
-          <p className="debit-amount">
+        <div key={index} className="list-item">
+          <p className="item-description">Description: {debit.description}</p>
+          <p className="item-amount">
             Amount: ${Number(debit.amount).toFixed(2)}
           </p>
-          <p className="debit-debitDate">Date: {debit.date}</p>
+          <p className="item-debitDate">Date: {debit.date}</p>
         </div>
       );
     });
@@ -40,9 +40,9 @@ const Debits = (props) => {
 
   return (
     <div>
-      <h1>I'm on Debits Page</h1>
+      <h1>Debits</h1>
 
-      <form action="" onSubmit={handleAddDebit}>
+      <form action="" onSubmit={handleAddDebit} className="form">
         <label htmlFor="description">Enter a description</label>
         <input type="text" id="description" required />
         <label htmlFor="amount">Enter an Amount</label>
@@ -51,16 +51,18 @@ const Debits = (props) => {
         <button type="submit">Add Debit</button>
       </form>
 
-      <h3>All Debits:</h3>
-      <div key="initial-debt" className="debit-item">
-        {/* prettier-ignore */}
-        <p className="debit-description">Description: Initial Debit provided by the API</p>
-        <p className="debit-amount">
-          Amount: ${Number(intialDebtAmount).toFixed(2)}
-        </p>
-        <p className="debit-debitDate">Date: {dateStr}</p>
+      <h2>List of Debits</h2>
+      <div className="display">
+        <div key="initial-debt" className="list-item">
+          {/* prettier-ignore */}
+          <p className="item-description">Description: Initial Debit provided by the API</p>
+          <p className="item-amount">
+            Amount: ${Number(intialDebtAmount).toFixed(2)}
+          </p>
+          <p className="item-date">Date: {dateStr}</p>
+        </div>
+        {renderDebitList()}
       </div>
-      {renderDebitList()}
     </div>
   );
 };

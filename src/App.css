@@ -36,3 +36,94 @@
     transform: rotate(360deg);
   }
 }
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-image: linear-gradient(to right, #003e62, #0070a8, #00aeef);
+}
+
+header h1 {
+  order: 1;
+  color: white;
+  font-size: 1.5rem;
+  margin: 0;
+}
+header nav {
+  order: 2;
+}
+header nav ul {
+  list-style: none;
+  text-decoration: none;
+}
+header nav ul li {
+  display: inline-block;
+}
+.link-item {
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link-item:hover {
+  background-color: #00aeef;
+  color: #003e62;
+}
+
+/* Balance Debit Credit */
+.amounts-div {
+  display: flex;
+  column-gap: 20px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #0070a8;
+  line-height: 0;
+}
+.balance {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.debit {
+  color: #b20000;
+}
+.credit {
+  color: #00b400;
+}
+
+/* Debit - Credit Display */
+.form label {
+  display: block;
+  margin: 5px 0;
+}
+.form #description {
+  width: 50%;
+  padding: 10px;
+}
+.form #amount {
+  width: 120px;
+}
+.form button {
+  font-size: 16px;
+  display: block;
+  margin: 10px auto 0;
+  padding: 8px 35px;
+  background-color: #00aeef;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.form button:hover {
+  background-color: #0070a8;
+}
+.list-item {
+  border: 1px solid #003e62;
+  width: 80vh;
+  margin: 0 auto;
+  border-radius: 15px;
+}
