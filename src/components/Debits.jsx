@@ -8,9 +8,9 @@ const Debits = (props) => {
     return props.debitList.map((debit, index) => {
       return (
         <div key={index} className="debit-item">
-          <p className="debit-description">{debit.description}</p>
-          <p className="debit-amount">{debit.amount}</p>
-          <p className="debit-debitDate">{debit.date}</p>
+          <p className="debit-description">Description: {debit.description}</p>
+          <p className="debit-amount">Amount: ${debit.amount}</p>
+          <p className="debit-debitDate">Date: {debit.date}</p>
         </div>
       );
     });
@@ -19,14 +19,13 @@ const Debits = (props) => {
   const handleAddDebit = (event) => {
     const dateObj = new Date();
     // prettier-ignore
-    //to prevent prettier from rearrenging the line
+    //to prevent prettier from rearrenging the line, for better redability
     const dateStr = (dateObj.getMonth() + 1) + "/" + dateObj.getDate() + "/" + dateObj.getFullYear()
 
     event.preventDefault(); //prevent from refreshing the whole website
 
     const debitdescription = event.target[0].value; //description input
     const amountOfDebit = event.target[1].value; // amount input
-    const debitDate = event.target[2].value; //date input
 
     const debitObj = {
       description: debitdescription,

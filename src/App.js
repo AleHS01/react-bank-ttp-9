@@ -6,6 +6,7 @@ import axios from "axios";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
 import Debits from "./components/Debits";
+import Credit from "./components/Credit";
 
 const App = () => {
   const [balance, setBalance] = useState(0);
@@ -14,6 +15,7 @@ const App = () => {
   const [credit, setCredit] = useState(undefined);
   const [debitList, setDebitList] = useState([]);
   const [creditList, setCreditList] = useState([]);
+  const [balanceTextColor, setBalanceTextColor] = useState("#000");
 
   useEffect(() => {
     const getData = async () => {
@@ -26,6 +28,8 @@ const App = () => {
         );
         setCredit(creditResponse.data);
         setDebit(debitResponse.data);
+        console.log(creditResponse);
+        console.log(debitResponse);
         // I don't use debit & credit dirrectly cause they will load value after the function is done
         setBalance(creditResponse.data - debitResponse.data);
       } catch (error) {
@@ -36,12 +40,29 @@ const App = () => {
   }, []);
 
   const addDebit = (debitObj) => {
+    if (debit + debit.amount > balance) {
+      setBalanceTextColor("#B20000");
+    }
+
     setDebit(
       (previossDebitAmount) =>
         Number(previossDebitAmount) + Number(debitObj.amount)
     );
+    //dont use debit dirrectly cause the update happend after the function
     setBalance((previousBalance) => previousBalance - debitObj.amount);
     setDebitList([...debitList, debitObj]);
+  };
+
+  const addCredit = (creditObj) => {
+    setCredit(
+      (previousCreditAmount) =>
+        Number(previousCreditAmount) + Number(creditObj.amount)
+    );
+    //dont use credit dirrectly cause the update happend after the function
+    setBalance(
+      (previousBalance) => Number(previousBalance) - Number(creditObj.amount)
+    );
+    setCreditList([...debitList, creditObj]);
   };
 
   return (
@@ -51,7 +72,9 @@ const App = () => {
           {/* if credit and debit are defined then lets render the data, else let display loading screen */}
           {credit !== undefined && debit !== undefined ? (
             <div>
-              <p>Balance: ${balance.toFixed(2)}</p>
+              <p style={{ color: balanceTextColor }}>
+                Balance: ${balance.toFixed(2)}
+              </p>
               <p>Debit: ${Number(debit).toFixed(2)}</p>
               <p>Credit: ${credit.toFixed(2)}</p>
             </div>
@@ -86,10 +109,15 @@ const App = () => {
                 // setBalance={setBalance}
                 // debit={debit}
                 // setDebit={setDebit}
+                balanceTextColor={balanceTextColor}
                 debitList={debitList}
                 addDebit={addDebit}
               />
             }
+          />
+          <Route
+            path="/credit/*"
+            element={<Credit creditList={creditList} addCredit={addCredit} />}
           />
         </Routes>
       </div>
