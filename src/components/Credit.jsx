@@ -49,7 +49,7 @@ const Credit = (props) => {
         <input type="number" id="amount" min={0} step="any" required />
         {/*step attribute is to alow user to enter a decimal number, or any type of number it wants
         liek 0.01, or 0.1 or anything or 20, so the user will only add multiple of 20 etc*/}
-        <button type="submit">Add Debit</button>
+        <button type="submit">Add credit</button>
       </form>
 
       <h3>All Credit:</h3>

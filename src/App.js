@@ -118,7 +118,7 @@ const App = () => {
           <div className="loading-div">Loading Data...</div>
         )}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/*" element={<Home />} />
           <Route
             path="/debit/*"
             element={
