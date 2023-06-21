@@ -87,17 +87,17 @@ const App = () => {
           <nav>
             <ul>
               <li>
-                <Link to="/" className="link-item">
+                <Link to="/react-bank-ttp-9/" className="link-item">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/debit" className="link-item">
+                <Link to="/react-bank-ttp-9/debit" className="link-item">
                   Debits
                 </Link>
               </li>
               <li>
-                <Link to="/credit" className="link-item">
+                <Link to="/react-bank-ttp-9/credit" className="link-item">
                   Credit
                 </Link>
               </li>
@@ -118,9 +118,9 @@ const App = () => {
           <div className="loading-div">Loading Data...</div>
         )}
         <Routes>
-          <Route path="/*" element={<Home />} />
+          <Route path="/react-bank-ttp-9/" element={<Home />} />
           <Route
-            path="/debit/*"
+            path="/react-bank-ttp-9/debit/*"
             element={
               <Debits
                 initialDebit={initialDebiit}
@@ -131,7 +131,7 @@ const App = () => {
             }
           />
           <Route
-            path="/credit/*"
+            path="/react-bank-ttp-9/credit/*"
             element={
               <Credit
                 creditList={creditList}
