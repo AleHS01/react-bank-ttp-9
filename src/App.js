@@ -16,6 +16,9 @@ const App = () => {
   const [debitList, setDebitList] = useState([]);
   const [creditList, setCreditList] = useState([]);
   const [balanceTextColor, setBalanceTextColor] = useState("#000");
+  // this are used to pass the inital value of credit and debit to display frist item of each list
+  const [initialCredit, setInitialCredit] = useState(undefined);
+  const [initialDebiit, setInitialDebit] = useState(undefined);
 
   useEffect(() => {
     const getData = async () => {
@@ -28,8 +31,10 @@ const App = () => {
         );
         setCredit(creditResponse.data);
         setDebit(debitResponse.data);
-        console.log(creditResponse);
-        console.log(debitResponse);
+        // Set Initial data to creat the firs item of each list
+        setInitialCredit(creditResponse.data);
+        setInitialDebit(debitResponse.data);
+
         // I don't use debit & credit dirrectly cause they will load value after the function is done
         setBalance(creditResponse.data - debitResponse.data);
       } catch (error) {
@@ -60,9 +65,9 @@ const App = () => {
     );
     //dont use credit dirrectly cause the update happend after the function
     setBalance(
-      (previousBalance) => Number(previousBalance) - Number(creditObj.amount)
+      (previousBalance) => Number(previousBalance) + Number(creditObj.amount)
     );
-    setCreditList([...debitList, creditObj]);
+    setCreditList([...creditList, creditObj]);
   };
 
   return (
@@ -92,7 +97,10 @@ const App = () => {
               <Link to="/userProfile">User Profile</Link>
             </li>
             <li>
-              <Link to="/debits">Debits</Link>
+              <Link to="/debit">Debits</Link>
+            </li>
+            <li>
+              <Link to="/credit">Credit</Link>
             </li>
           </ul>
         </nav>
@@ -102,13 +110,10 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/userProfile/*" element={<UserProfile />} />
           <Route
-            path="/debits/*"
+            path="/debit/*"
             element={
               <Debits
-                // balance={balance}
-                // setBalance={setBalance}
-                // debit={debit}
-                // setDebit={setDebit}
+                initialDebit={initialDebiit}
                 balanceTextColor={balanceTextColor}
                 debitList={debitList}
                 addDebit={addDebit}
@@ -117,7 +122,13 @@ const App = () => {
           />
           <Route
             path="/credit/*"
-            element={<Credit creditList={creditList} addCredit={addCredit} />}
+            element={
+              <Credit
+                creditList={creditList}
+                addCredit={addCredit}
+                initialCredit={initialCredit}
+              />
+            }
           />
         </Routes>
       </div>
