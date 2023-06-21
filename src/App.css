@@ -38,7 +38,7 @@
 }
 
 /* Header */
-header {
+header.navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,20 +46,20 @@ header {
   background-image: linear-gradient(to right, #003e62, #0070a8, #00aeef);
 }
 
-header h1 {
+header.navigation h1 {
   order: 1;
   color: white;
   font-size: 1.5rem;
   margin: 0;
 }
-header nav {
+header.navigation nav {
   order: 2;
 }
-header nav ul {
+header.navigation nav ul {
   list-style: none;
   text-decoration: none;
 }
-header nav ul li {
+header.navigation nav ul li {
   display: inline-block;
 }
 .link-item {
@@ -75,7 +75,8 @@ header nav ul li {
 }
 
 /* Balance Debit Credit */
-.amounts-div {
+.amounts-div,
+.loading-div {
   display: flex;
   column-gap: 20px;
   justify-content: center;
@@ -83,6 +84,30 @@ header nav ul li {
   border: 1px solid #0070a8;
   line-height: 0;
 }
+.loading-div {
+  height: 35px;
+  color: white;
+  background: linear-gradient(
+    90deg,
+    #003e62 25%,
+    #0070a8 37%,
+    #00aeef 50%,
+    #003e62 73%
+  );
+  background-size: 200% 200%;
+  animation: loading-gradient-animation 1.5s linear infinite;
+  font-weight: bold;
+}
+
+@keyframes loading-gradient-animation {
+  0% {
+    background-position: -100% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
 .balance {
   font-size: 1.1rem;
   font-weight: bold;
@@ -122,8 +147,45 @@ header nav ul li {
   background-color: #0070a8;
 }
 .list-item {
-  border: 1px solid #003e62;
+  border: 1px solid #0070a8;
   width: 80vh;
-  margin: 0 auto;
+  margin: 10px auto;
   border-radius: 15px;
+}
+
+/* HomePage */
+header.welcome {
+  margin: 80px 0 50px;
+}
+
+header.welcome h1 {
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+.Home-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.p1 {
+  margin-bottom: 50px;
+}
+
+.Home-container h3 {
+  font-size: 2rem;
+}
+
+.Home-container ul li {
+  list-style: none;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.Home-container ul li span {
+  font-weight: bold;
+}
+
+.p2 {
+  margin-top: 50px;
 }

@@ -29,8 +29,11 @@ const App = () => {
         const debitResponse = await axios.get(
           "https://bank-of-react-b745wfs0u-ajlapid718.vercel.app/debits"
         );
-        setCredit(creditResponse.data);
-        setDebit(debitResponse.data);
+        setTimeout(() => {
+          setCredit(creditResponse.data);
+          setDebit(debitResponse.data);
+        }, 2000); //just to load the loading Animation
+
         // Set Initial data to creat the firs item of each list
         setInitialCredit(creditResponse.data);
         setInitialDebit(debitResponse.data);
@@ -44,11 +47,15 @@ const App = () => {
     getData();
   }, []);
 
-  const addDebit = (debitObj) => {
-    if (debit + debit.amount > balance) {
+  useEffect(() => {
+    if (debit > balance) {
       setBalanceTextColor("#B20000");
+    } else {
+      setBalanceTextColor("#000");
     }
+  }, [debit, balance]);
 
+  const addDebit = (debitObj) => {
     setDebit(
       (previossDebitAmount) =>
         Number(previossDebitAmount) + Number(debitObj.amount)
@@ -73,7 +80,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <header>
+        <header className="navigation">
           <h1 className="logo-name">AleHS Bank App</h1>
 
           {/* Navigation */}
@@ -108,7 +115,7 @@ const App = () => {
             <p className="credit">Credit: ${credit.toFixed(2)}</p>
           </div>
         ) : (
-          <div className="loading-div">Loading...</div>
+          <div className="loading-div">Loading Data...</div>
         )}
         <Routes>
           <Route path="/" element={<Home />} />

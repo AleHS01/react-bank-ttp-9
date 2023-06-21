@@ -40,7 +40,7 @@ const Credit = (props) => {
 
   return (
     <div>
-      <h1>I'm on Credit Page</h1>
+      <h1>Credit</h1>
 
       <form action="" onSubmit={handleAddCredit} className="form">
         <label htmlFor="description">Enter a description</label>
