@@ -12,6 +12,8 @@ const App = () => {
   // Both are undefined so the Balance load only when both have a value, to avoid the user see a 0 in balance first
   const [debit, setDebit] = useState(undefined);
   const [credit, setCredit] = useState(undefined);
+  const [debitList, setDebitList] = useState([]);
+  const [creditList, setCreditList] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -33,6 +35,15 @@ const App = () => {
     getData();
   }, []);
 
+  const addDebit = (debitObj) => {
+    setDebit(
+      (previossDebitAmount) =>
+        Number(previossDebitAmount) + Number(debitObj.amount)
+    );
+    setBalance((previousBalance) => previousBalance - debitObj.amount);
+    setDebitList([...debitList, debitObj]);
+  };
+
   return (
     <Router>
       <div className="App">
@@ -41,7 +52,7 @@ const App = () => {
           {credit !== undefined && debit !== undefined ? (
             <div>
               <p>Balance: ${balance.toFixed(2)}</p>
-              <p>Debit: ${debit.toFixed(2)}</p>
+              <p>Debit: ${Number(debit).toFixed(2)}</p>
               <p>Credit: ${credit.toFixed(2)}</p>
             </div>
           ) : (
@@ -71,10 +82,12 @@ const App = () => {
             path="/debits/*"
             element={
               <Debits
-                balance={balance}
-                setBalance={setBalance}
-                debit={debit}
-                setDebit={setDebit}
+                // balance={balance}
+                // setBalance={setBalance}
+                // debit={debit}
+                // setDebit={setDebit}
+                debitList={debitList}
+                addDebit={addDebit}
               />
             }
           />

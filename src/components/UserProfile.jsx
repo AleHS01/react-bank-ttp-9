@@ -12,7 +12,7 @@ const UserProfile = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/userProfile/details">Details</Link>
+            <Link to="/userProfile/">Details</Link>
           </li>
           <li>
             <Link to="/userProfile/settings">Settings</Link>
@@ -21,7 +21,7 @@ const UserProfile = () => {
       </nav>
 
       <Routes>
-        <Route path="/details" element={<ProfileDetails />} />
+        <Route path="/" element={<ProfileDetails />} />
         <Route path="/settings" element={<ProfileSettings />} />
       </Routes>
     </div>

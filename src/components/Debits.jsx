@@ -1,50 +1,75 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
 const Debits = (props) => {
-  const [listDebit, setListDebit] = useState([]);
+  // const [listDebit, setListDebit] = useState([]);
 
-  const addDebit = (event) => {
-    event.preventDefault();
+  const renderDebitList = () => {
+    return props.debitList.map((debit, index) => {
+      return (
+        <div key={index} className="debit-item">
+          <p className="debit-description">{debit.description}</p>
+          <p className="debit-amount">{debit.amount}</p>
+          <p className="debit-debitDate">{debit.date}</p>
+        </div>
+      );
+    });
+  };
 
-    const debitdescription = event.target[0].value;
-    const amountOfDebit = event.target[1].value;
-    const debitDate = event.target[2].value;
+  const handleAddDebit = (event) => {
+    const dateObj = new Date();
+    // prettier-ignore
+    //to prevent prettier from rearrenging the line
+    const dateStr = (dateObj.getMonth() + 1) + "/" + dateObj.getDate() + "/" + dateObj.getFullYear()
+
+    event.preventDefault(); //prevent from refreshing the whole website
+
+    const debitdescription = event.target[0].value; //description input
+    const amountOfDebit = event.target[1].value; // amount input
+    const debitDate = event.target[2].value; //date input
 
     const debitObj = {
       description: debitdescription,
       amount: amountOfDebit,
-      date: debitDate,
+      date: dateStr,
     };
 
-    setListDebit([...listDebit, debitObj]);
+    props.addDebit(debitObj);
+
+    event.target.reset(); //this is to empty the form once is filled
   };
+
   return (
     <div>
       <h1>I'm on Debits Page</h1>
 
-      <form action="" onSubmit={addDebit}>
+      <form action="" onSubmit={handleAddDebit}>
         <label htmlFor="description">Enter a description</label>
         <input type="text" id="description" />
         <label htmlFor="amount">Enter an Amount</label>
-        <input type="number" id="amount" />
-        <label htmlFor="date">Select a Date</label>
-        <input type="date" id="date" />
+        <input type="number" id="amount" min={0} step="any" />
+        {/*step attribute is to alow user to enter a decimal number*/}
         <button type="submit">Add Debit</button>
       </form>
 
       <h3>All Debits:</h3>
-      {listDebit.map((debit, index) => {
-        return (
-          <div key={index} className="debit-item">
-            <p className="debit-description">{debit.description}</p>
-            <p className="debit-amount">{debit.amount}</p>
-            <p className="debit-debitDate">{debit.date}</p>
-          </div>
-        );
-      })}
+      {renderDebitList()}
     </div>
   );
 };
 
 export default Debits;
+
+// useEffect(() => {
+//   //Once the array is in the local browser storage, then I can retrieve to be dsiplay
+//   const storedListDebit = localStorage.getItem("listDebit");
+//   if (storedListDebit) {
+//     setListDebit(JSON.parse(storedListDebit));
+//   }
+//   renderDebitList(listDebit); //then render the list as soon as I enter the page
+// }, []);
+
+// useEffect(() => {
+//   //This is basicly to save the array in the browser, so that can be retrieve later
+//   localStorage.setItem("listDebit", JSON.stringify(listDebit));
+// }, [listDebit]);
